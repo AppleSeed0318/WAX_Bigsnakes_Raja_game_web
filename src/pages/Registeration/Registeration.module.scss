@@ -1,0 +1,41 @@
+@import '../../sass/variables.scss';
+.main{
+    color: white;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    margin: auto;
+}
+
+.section{
+    padding: 1rem 4rem;
+    // display: flex;
+    // flex-direction: column;
+    // justify-content: center;
+    min-height: 80vh;
+}
+
+.profile_contents{
+    background-color: #2f3344;
+    padding:20px;
+}
+
+.profile_footer{
+    display: flex;
+    justify-content: center;
+}
+
+.footer{
+    background-color:  $pink_footer_color
+
+}
+
+.footerAnchor{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: .5rem 0;
+    font-weight: bold;
+    color: white;
+}

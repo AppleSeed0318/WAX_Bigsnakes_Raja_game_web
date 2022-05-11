@@ -1,0 +1,1 @@
+export {Fighters} from './Fighters'

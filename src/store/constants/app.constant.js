@@ -1,0 +1,5 @@
+export const APP_CONSTANTS = {
+    SET_PAGE_TITLE: 'SET_PAGE_TITLE',
+    SET_MENU: 'SET_MENU',
+    TOTAL_NFTS: 'TOTAL_NFTS',
+};

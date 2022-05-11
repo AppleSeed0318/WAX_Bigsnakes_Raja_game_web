@@ -1,0 +1,63 @@
+@import '../../sass/variables.scss';
+.main{
+    color: white;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    margin: auto;
+}
+
+.section{
+    padding: 1rem 4rem;
+    // display: flex;
+    // flex-direction: column;
+    // justify-content: center;
+    min-height: 80vh;
+    display: flex;
+    justify-content: space-between;
+
+    h1{
+        margin-bottom: 50px;
+    }
+
+    .wallet_connect{
+        margin-top:30px;
+        .button{
+            border-radius: 50px;
+            
+        }
+    }
+
+    .leftside{
+        width: 48%;
+        text-align: center;
+        
+    }
+
+    .rightside{
+        width: 48%;   
+        text-align: center;
+        
+    }
+
+    .button{
+        width:100%;
+        height: 50px;
+        max-width:240px;
+    }
+}
+
+.footer{
+    background-color:  $pink_footer_color
+
+}
+
+.footerAnchor{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: .5rem 0;
+    font-weight: bold;
+    color: white;
+}

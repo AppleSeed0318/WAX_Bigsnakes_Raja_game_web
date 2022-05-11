@@ -1,0 +1,1 @@
+export {WalletManager} from './WalletManager'

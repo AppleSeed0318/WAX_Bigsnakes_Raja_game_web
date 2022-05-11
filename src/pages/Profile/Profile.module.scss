@@ -1,0 +1,70 @@
+@import '../../sass/variables.scss';
+.main{
+    color: white;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    margin: auto;
+}
+
+.section{
+    padding: 1rem 4rem;
+    // display: flex;
+    // flex-direction: column;
+    // justify-content: center;
+    min-height: 80vh;
+}
+.profile_header{
+    display: flex;
+    justify-content: space-between;
+}
+
+.profile_contents{
+    display:flex;
+    background-color: #2f3344;
+    padding:20px;
+    margin-top:20px;
+    margin-bottom:20px;
+    .profile_avatar{
+        width:150px;
+    }
+    .profile_text{
+        width: 100%;
+        margin-left: 30px;
+        input{
+            color:white;
+        }
+        .profile_email{
+            width:50%;
+            margin-right:10px;
+        }
+
+        .profile_nickname{
+            width:50%;
+            margin-left:10px;
+        }
+        p{
+            margin-bottom: 8px;
+        }
+    }
+}
+
+.profile_footer{
+    display: flex;
+    justify-content: right;
+}
+
+.footer{
+    background-color:  $pink_footer_color
+
+}
+
+.footerAnchor{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: .5rem 0;
+    font-weight: bold;
+    color: white;
+}
