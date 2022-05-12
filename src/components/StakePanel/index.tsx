@@ -14,6 +14,7 @@ import "./index.module.css";
 export interface Prop {
   // onStake: any,
   wax:any,
+  walletSession: any,
   Account: any,
   items: any,
   ids: any,
@@ -21,7 +22,7 @@ export interface Prop {
   setStakedList: any,
 }
 
-export const StakePanel = ({wax, Account, items, ids, stakedList, setStakedList }: Prop) => {
+export const StakePanel = ({wax, walletSession, Account, items, ids, stakedList, setStakedList }: Prop) => {
 
   const onSuccessStake = (asset_id:any) => {
     let _stakedList = [...stakedList];
@@ -40,12 +41,12 @@ export const StakePanel = ({wax, Account, items, ids, stakedList, setStakedList 
     // let wallet1_userAccount = await wax.login();
     var id_list = [];
     id_list.push(asset_id);
-    console.log("Account", Account);
-    if (!wax.api || Account == "") {
+    console.log("Account", Account, walletSession);
+    if (!walletSession || Account == "") {
       console.log('* Login first *');
     }
     try {
-      const result = await wax.api.transact({
+      const result = await walletSession.transact({
         actions: [{
           account: "atomicassets",
           name: 'transfer',
@@ -66,6 +67,7 @@ export const StakePanel = ({wax, Account, items, ids, stakedList, setStakedList 
       });
 
       if (result) {
+        console.log("success result----------------");
         let _stakedList = [...stakedList];
         _stakedList.push(asset_id);
         setStakedList(_stakedList);
@@ -77,6 +79,7 @@ export const StakePanel = ({wax, Account, items, ids, stakedList, setStakedList 
 
     } catch (e) {
       console.log("An error is occured in stake");
+      console.log(e);
     }
   }
   const style = {

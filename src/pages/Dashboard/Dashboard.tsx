@@ -6,22 +6,27 @@ import MenuItem from '@mui/material/MenuItem';
 
 import * as waxjs from "@waxio/waxjs/dist";
 
+import AnchorLink from 'anchor-link'
+import AnchorLinkBrowserTransport from 'anchor-link-browser-transport'
+
 import Modal from '@mui/material/Modal';
 import { useNavigate, useLocation } from "react-router-dom";
 export interface NFTProps {
   wax: any,
+  setWalletSession: any,
   setAccount: any,
   // balance: any,
   setAssets: any,
   // loginFlag: any,
 }
-export const Dashboard = ({ wax, setAccount, setAssets }: NFTProps) => {
+export const Dashboard = ({ wax, setWalletSession, setAccount, setAssets }: NFTProps) => {
 
   const [endpoint, setEndPoint] = useState("WCW");
   // const [userAccount, setUserAccount] = useState("");
   const [userBalance, setUserBalance] = useState("");
   const navigate = useNavigate();
 
+  let  wallet_session:any;
   let loggedIn = false;
   let wallet1_userAccount: any;
   // [loggedIn, setLoginedIn] = useState(false);
@@ -59,7 +64,9 @@ export const Dashboard = ({ wax, setAccount, setAssets }: NFTProps) => {
       if (!loggedIn) {
         console.log("str");
         let isflag = true;
-        wallet1_userAccount = await wax.login();
+        // wallet1_userAccount = await wax.login();
+        wallet1_userAccount = await wallet_login();
+
         console.log(wallet1_userAccount);
         setwallet_userAccount(wallet1_userAccount);
         let pubKeys = wax.pubKeys;
@@ -98,7 +105,8 @@ export const Dashboard = ({ wax, setAccount, setAssets }: NFTProps) => {
           }
         }
         if (isflag) {
-          const result = await wax.api.transact({
+          console.log("send message add person", wallet_session);
+          const result = await wallet_session.transact({
             actions: [{
               account: contract_owner_name,
               name: 'addperson',
@@ -112,12 +120,14 @@ export const Dashboard = ({ wax, setAccount, setAssets }: NFTProps) => {
             }]
           }, {
             blocksBehind: 3,
-            expireSeconds: 30
+            expireSeconds: 60
           });
         }
 
       }
     } catch (e) {
+      console.log("-----------------------");
+      console.log(e);
     }
   }
 
@@ -162,8 +172,43 @@ export const Dashboard = ({ wax, setAccount, setAssets }: NFTProps) => {
     marginRight: "12px",
   }
 
+  const [walletType, setWalletType] = useState("WCW");
   const handleChange = (e: any) => {
     setEndPoint(e.target.value);
+    console.log(e.target.value);
+  }
+
+  ///--------------------- for anchor ----------------------------
+
+  const dapp = "collection";
+
+  async function wallet_login() {
+    var wallet_userAccount;
+    const transport = new AnchorLinkBrowserTransport();
+    const anchorLink = new AnchorLink({
+      transport,
+      chains: [{
+        chainId: '1064487b3cd1a897ce03ae5b6a865651747e2e152090f99c1d19d44e01aea5a4',
+        nodeUrl: 'https://wax.greymass.com',
+      }],
+    }); 
+    if (endpoint == "Anchor") {
+      var sessionList = await anchorLink.listSessions(dapp);
+      if (sessionList && sessionList.length > 0) {
+        wallet_session = await anchorLink.restoreSession(dapp);
+      } else {
+        wallet_session = (await anchorLink.login(dapp)).session;
+      }
+      wallet_userAccount = String(wallet_session.auth).split("@")[0];
+      let auth = String(wallet_session.auth).split("@")[1];
+      let anchorAuth = auth;
+    } else {
+      wallet_userAccount = await wax.login();
+      wallet_session = wax.api;
+      let anchorAuth = "active";
+    }
+    setWalletSession(wallet_session);
+    return wallet_userAccount;
   }
 
   return (

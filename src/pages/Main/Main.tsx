@@ -21,12 +21,13 @@ import Modal from '@mui/material/Modal';
 
 export interface NFTProp {
   wax: any,
+  walletSession: any,
   Assets: any,
   Account: any,
   stakedList: any,
   setStakedList: any,
 }
-export const Main = ({ wax, Assets, Account, stakedList, setStakedList }: NFTProp) => {
+export const Main = ({ wax, walletSession, Assets, Account, stakedList, setStakedList }: NFTProp) => {
   const [showNFTs, setShowNFTs] = useState(Assets);
 
   const [open, setOpen] = useState(false);
@@ -96,11 +97,11 @@ export const Main = ({ wax, Assets, Account, stakedList, setStakedList }: NFTPro
     var id_list = [];
 
 
-    if (!wax.api || Account == "") {
+    if (!walletSession || Account == "") {
       console.log('* Login first *');
     }
     try {
-      const result = await wax.api.transact({
+      const result = await walletSession.transact({
         actions: [{
           account: contract_owner_name,
           name: 'unstake',
@@ -129,11 +130,11 @@ export const Main = ({ wax, Assets, Account, stakedList, setStakedList }: NFTPro
     var id_list = [];
 
 
-    if (!wax.api || Account == "") {
+    if (!walletSession || Account == "") {
       console.log('* Login first *');
     }
     try {
-      const result1 = await wax.api.transact({
+      const result1 = await walletSession.transact({
         actions: [{
           account: contract_owner_name,
           name: 'checksolowin',
@@ -184,11 +185,11 @@ export const Main = ({ wax, Assets, Account, stakedList, setStakedList }: NFTPro
 
   const randomWinner = async () => {
 
-    if (!wax.api || Account == "") {
+    if (!walletSession || Account == "") {
       console.log('* Login first *');
     }
     try {
-      const result = await wax.api.transact({
+      const result = await walletSession.transact({
         actions: [{
           account: contract_owner_name,
           name: 'checksolowin',
@@ -236,8 +237,15 @@ export const Main = ({ wax, Assets, Account, stakedList, setStakedList }: NFTPro
                 Select your NFT for staking
               </Typography>
               <Typography id="modal-modal-description" sx={{ mt: 5 }}>
-                <StakePanel wax={wax} Account = {Account} items={nfts} ids={ids} stakedList = {stakedList} 
-                setStakedList = {setStakedList}/>
+                <StakePanel 
+                  wax={wax} 
+                  walletSession = {walletSession} 
+                  Account = {Account} 
+                  items={nfts} 
+                  ids={ids} 
+                  stakedList = {stakedList} 
+                  setStakedList = {setStakedList}
+                />
               </Typography>
 
             </Box>

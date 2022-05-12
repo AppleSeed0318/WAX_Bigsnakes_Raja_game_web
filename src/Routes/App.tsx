@@ -22,6 +22,8 @@ export const App = () => {
   const [balance, setBalance] = useState("");
   const [nickname, setNickname] = useState("");
 
+  const [walletSession, setWalletSession] = useState(null);
+
   const endpoint_uri = "https://wax.greymass.com";
   const wax = new waxjs.WaxJS({
     rpcEndpoint: endpoint_uri
@@ -31,10 +33,16 @@ export const App = () => {
     <>
       <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Dashboard wax = {wax} setAssets = {setAssets} setAccount = {setAccount}/>} />
+            <Route path="/" element={<Dashboard 
+              wax = {wax} 
+              setWalletSession = {setWalletSession} 
+              setAssets = {setAssets} 
+              setAccount = {setAccount}/>} 
+            />
             <Route path="/main" element={
               <Main 
                 wax = {wax} 
+                walletSession = {walletSession}
                 Assets = {Assets} 
                 Account = {Account} 
                 stakedList = {stakedList} 
