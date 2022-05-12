@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit&display=swap');
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+}
+
+img {
+  width: 100%;
+}
+
+@font-face {
+    font-family: "snake-font";
+    src: local("snake-font"),
+     url("./fonts/Snake in the Boot.ttf") format("truetype");
+    font-weight: bold;
+}
+
+body {
+  margin: 0;
+  font-family: 'Roboto';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: 'Source Sans 3', sans-serif;
+  /* background: linear-gradient(139.73deg, rgb(255, 245, 248) 0%, rgb(255, 228, 235) 100%); */
+  /* background-color: rgb(255, 228, 235); */
+  background-color: #14192d;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+ul.MuiList-root {
+/*  background-color: #2f3344 !important;
+  color: white !important;*/
+}
+
+div.MuiSelect-select {
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+}
